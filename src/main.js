@@ -134,6 +134,22 @@ function addBreathFog(x, y, intensity) {
   canvasCtx.fill();
 }
 
+function distance(p1, p2) {
+  const dx = p1.x - p2.x;
+  const dy = p1.y - p2.y;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function isHandOpen(landmarks) {
+  const wrist = landmarks[0];
+  const middleExtended = distance(wrist, landmarks[12]) > distance(wrist, landmarks[10]);
+  const ringExtended = distance(wrist, landmarks[16]) > distance(wrist, landmarks[14]);
+  const pinkyExtended = distance(wrist, landmarks[20]) > distance(wrist, landmarks[18]);
+  
+  // If at least 2 of the 3 other fingers (middle, ring, pinky) are extended, we consider it an open hand
+  return (middleExtended ? 1 : 0) + (ringExtended ? 1 : 0) + (pinkyExtended ? 1 : 0) >= 2;
+}
+
 async function renderLoop() {
   let startTimeMs = performance.now();
   if (video.currentTime !== lastVideoTime) {
@@ -147,13 +163,33 @@ async function renderLoop() {
 
       if (handResults.landmarks && handResults.landmarks.length > 0) {
         handResults.landmarks.forEach((landmarks, handIndex) => {
-          // Wipe ONLY with the index finger tip
-          const indexTip = landmarks[8];
-          const indexId = `index-${handIndex}`;
           
-          activeIds.add(indexId);
-          // Small radius to simulate drawing with a single finger
-          wipeFog(indexId, indexTip.x, indexTip.y, 35);
+          if (isHandOpen(landmarks)) {
+            // OPEN HAND: Wipe a large area
+            const pointsToWipe = [
+              { id: `thumb-${handIndex}`, lm: landmarks[4], radius: 60 },
+              { id: `index-${handIndex}`, lm: landmarks[8], radius: 60 },
+              { id: `middle-${handIndex}`, lm: landmarks[12], radius: 60 },
+              { id: `ring-${handIndex}`, lm: landmarks[16], radius: 60 },
+              { id: `pinky-${handIndex}`, lm: landmarks[20], radius: 60 },
+              // Palm base, center, and top to cover the whole hand
+              { id: `wrist-${handIndex}`, lm: landmarks[0], radius: 100 },
+              { id: `palm-center-${handIndex}`, lm: landmarks[9], radius: 110 }
+            ];
+
+            pointsToWipe.forEach(pt => {
+              activeIds.add(pt.id);
+              wipeFog(pt.id, pt.lm.x, pt.lm.y, pt.radius);
+            });
+          } else {
+            // POINTING: Wipe ONLY with the index finger tip, like a pen
+            const indexTip = landmarks[8];
+            const indexId = `index-${handIndex}`;
+            
+            activeIds.add(indexId);
+            // Small radius to simulate drawing with a single finger
+            wipeFog(indexId, indexTip.x, indexTip.y, 35);
+          }
         });
       }
       
