@@ -96,6 +96,12 @@ body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Ultra Modern Header Navigation */
 #main-header {
   position: absolute;
@@ -114,30 +120,36 @@ body {
 
 .logo {
   font-family: 'Great Vibes', cursive;
-  font-size: 36px;
+  font-size: 38px;
   font-weight: 400;
   display: flex;
   align-items: center;
   gap: 12px;
+  background: linear-gradient(45deg, #ff007a, #7a00ff, #00f2fe, #ff007a);
+  background-size: 300% 300%;
+  animation: gradientShift 6s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: #fff;
   letter-spacing: 2px;
-  text-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
+  /* Text shadow for webkit clipped text can be tricky, using drop-shadow on SVG is better, but we will leave a slight glow */
+  filter: drop-shadow(0 0 10px rgba(255, 0, 122, 0.6));
 }
 
 .glass-nav {
   display: flex;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(15, 5, 25, 0.5); /* Darker, slightly purple tint */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 8px;
   border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 0, 122, 0.3); /* Neon pink border */
+  box-shadow: 0 8px 32px 0 rgba(122, 0, 255, 0.2), inset 0 0 20px rgba(255, 0, 122, 0.1);
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
@@ -145,29 +157,55 @@ body {
   border-radius: 40px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
 }
 
 .nav-link:hover, .nav-link.active {
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #ff007a, #7a00ff);
+  box-shadow: 0 0 10px #ff007a;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 60%;
 }
 
 .btn-premium {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  background: linear-gradient(135deg, #ff007a 0%, #7a00ff 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
   color: #fff;
-  border: none;
-  padding: 12px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 30px;
   border-radius: 40px;
   font-family: 'Outfit', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 4px 25px rgba(255, 0, 122, 0.5);
 }
 
 .btn-premium:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 35px rgba(255, 0, 122, 0.8);
+  border-color: rgba(255, 255, 255, 0.5);
 }
