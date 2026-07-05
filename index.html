@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magic Foggy Mirror</title>
+  </head>
+  <body>
+    <div id="mirror-container">
+      <video id="webcam" autoplay playsinline></video>
+      <canvas id="fog-canvas"></canvas>
+      <div id="loading" class="overlay-text">
+        <div class="spinner"></div>
+        <p>Loading Magic Mirror...</p>
+      </div>
+      <div id="instructions" class="overlay-text hidden">
+        <h2>Magic Mirror</h2>
+        <p>✋ Wipe with your hand</p>
+        <p>😮 Breathe to fog it up</p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

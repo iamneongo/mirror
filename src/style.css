@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden; /* Prevent scrolling */
+  width: 100vw;
+  height: 100vh;
+}
+
+#mirror-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The webcam video, mirrored horizontally */
+#webcam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Mirror effect */
+  z-index: 1;
+}
+
+/* The canvas that draws the fog and gets wiped */
+#fog-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none; /* Let clicks pass through if needed */
+}
+
+/* UI Overlays */
+.overlay-text {
+  position: absolute;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: opacity 0.5s ease;
+}
+
+.overlay-text h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.overlay-text p {
+  margin: 10px 0;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Loading Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 15px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
