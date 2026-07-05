@@ -3,17 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>Magic Foggy Mirror</title>
   </head>
   <body>
     <header id="main-header">
-      <div class="logo">✨ MagicMirror</div>
-      <nav>
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#paint0_linear)" />
+          <defs>
+            <linearGradient id="paint0_linear" x1="12" y1="2" x2="12" y2="21.02" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00F2FE" />
+              <stop offset="1" stop-color="#4FACFE" />
+            </linearGradient>
+          </defs>
+        </svg>
+        AuraMirror
+      </div>
+      <nav class="glass-nav">
         <a href="#" class="nav-link active">Home</a>
-        <a href="#" class="nav-link">Features</a>
-        <a href="#" class="nav-link">About</a>
-        <a href="#" class="nav-link">Contact</a>
+        <a href="#" class="nav-link">Experience</a>
+        <a href="#" class="nav-link">Studio</a>
+        <a href="#" class="nav-link">Connect</a>
       </nav>
+      <button class="btn-premium">Sign In</button>
     </header>
     <div id="mirror-container">
       <video id="webcam" autoplay playsinline></video>
