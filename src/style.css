@@ -41,7 +41,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 3; /* Above the webcam and header */
   pointer-events: none; /* Let clicks pass through if needed */
 }
 
@@ -106,7 +106,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 20; /* Above the canvas and video */
+  z-index: 2; /* Below the fog canvas, above the webcam */
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
