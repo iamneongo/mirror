@@ -147,22 +147,13 @@ async function renderLoop() {
 
       if (handResults.landmarks && handResults.landmarks.length > 0) {
         handResults.landmarks.forEach((landmarks, handIndex) => {
-          // Use all 5 fingertips and palm for a more natural hand wipe
-          const pointsToWipe = [
-            { id: `thumb-${handIndex}`, lm: landmarks[4], radius: 60 },
-            { id: `index-${handIndex}`, lm: landmarks[8], radius: 60 },
-            { id: `middle-${handIndex}`, lm: landmarks[12], radius: 60 },
-            { id: `ring-${handIndex}`, lm: landmarks[16], radius: 60 },
-            { id: `pinky-${handIndex}`, lm: landmarks[20], radius: 60 },
-            // Palm base, center, and top to cover the whole hand
-            { id: `wrist-${handIndex}`, lm: landmarks[0], radius: 100 },
-            { id: `palm-center-${handIndex}`, lm: landmarks[9], radius: 110 }
-          ];
-
-          pointsToWipe.forEach(pt => {
-            activeIds.add(pt.id);
-            wipeFog(pt.id, pt.lm.x, pt.lm.y, pt.radius);
-          });
+          // Wipe ONLY with the index finger tip
+          const indexTip = landmarks[8];
+          const indexId = `index-${handIndex}`;
+          
+          activeIds.add(indexId);
+          // Small radius to simulate drawing with a single finger
+          wipeFog(indexId, indexTip.x, indexTip.y, 35);
         });
       }
       

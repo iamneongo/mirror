@@ -96,13 +96,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Ultra Modern Header Navigation */
+/* Ultra Modern Minimalist Header Navigation */
 #main-header {
   position: absolute;
   top: 30px;
@@ -125,87 +119,60 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: linear-gradient(45deg, #ff007a, #7a00ff, #00f2fe, #ff007a);
-  background-size: 300% 300%;
-  animation: gradientShift 6s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   color: #fff;
   letter-spacing: 2px;
-  /* Text shadow for webkit clipped text can be tricky, using drop-shadow on SVG is better, but we will leave a slight glow */
-  filter: drop-shadow(0 0 10px rgba(255, 0, 122, 0.6));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
 }
 
 .glass-nav {
   display: flex;
   gap: 10px;
-  background: rgba(15, 5, 25, 0.5); /* Darker, slightly purple tint */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08); 
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   padding: 8px;
   border-radius: 50px;
-  border: 1px solid rgba(255, 0, 122, 0.3); /* Neon pink border */
-  box-shadow: 0 8px 32px 0 rgba(122, 0, 255, 0.2), inset 0 0 20px rgba(255, 0, 122, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  font-size: 15px;
+  font-family: 'Outfit', sans-serif;
   font-weight: 500;
   padding: 10px 24px;
   border-radius: 40px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   position: relative;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 13px;
+  letter-spacing: 0.5px;
+  font-size: 14px;
 }
 
 .nav-link:hover, .nav-link.active {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.05);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, #ff007a, #7a00ff);
-  box-shadow: 0 0 10px #ff007a;
-  transition: width 0.3s ease;
-  border-radius: 2px;
-}
-
-.nav-link:hover::after, .nav-link.active::after {
-  width: 60%;
+  color: #111;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
 .btn-premium {
-  background: linear-gradient(135deg, #ff007a 0%, #7a00ff 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 4s ease infinite;
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 10px 28px;
   border-radius: 40px;
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+  font-weight: 500;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 25px rgba(255, 0, 122, 0.5);
+  backdrop-filter: blur(10px);
 }
 
 .btn-premium:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 35px rgba(255, 0, 122, 0.8);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
