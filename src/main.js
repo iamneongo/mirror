@@ -119,13 +119,13 @@ function addBreathFog(x, y, intensity) {
   
   canvasCtx.globalCompositeOperation = 'source-over';
   
-  // Increased radius for smoother, more expansive breath fog
-  const radius = 450 * intensity; 
+  // Increased radius significantly to fill a larger area
+  const radius = 800 * intensity; 
   const gradient = canvasCtx.createRadialGradient(mappedX, mappedY, 0, mappedX, mappedY, radius);
   
-  // Smoother opacity transition and much faster darkening
-  gradient.addColorStop(0, `rgba(255, 255, 255, ${0.4 * intensity})`);
-  gradient.addColorStop(0.4, `rgba(255, 255, 255, ${0.15 * intensity})`);
+  // Make the fog appear much faster and denser
+  gradient.addColorStop(0, `rgba(255, 255, 255, ${0.8 * intensity})`);
+  gradient.addColorStop(0.5, `rgba(255, 255, 255, ${0.3 * intensity})`);
   gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
   
   canvasCtx.fillStyle = gradient;
@@ -210,7 +210,8 @@ async function renderLoop() {
         // Look for jawOpen to detect breathing/mouth open
         const jawOpen = blendshapes.find(b => b.categoryName === 'jawOpen')?.score || 0;
         
-        if (jawOpen > 0.15) {
+        // Lower threshold to make it trigger faster and more easily
+        if (jawOpen > 0.08) {
           // Mouth is open, get mouth center
           const landmarks = faceResults.faceLandmarks[0];
           // 13 and 14 are upper and lower lip inner
